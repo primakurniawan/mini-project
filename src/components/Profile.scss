@@ -1,0 +1,30 @@
+.Profile {
+  display: grid;
+  grid-template-areas:
+    "img name"
+    "img date";
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  &--img {
+    grid-area: img;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  &--name {
+    grid-area: name;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+
+  &--date {
+    grid-area: date;
+    font-size: 12px;
+    font-weight: 300;
+    margin-left: 0.5rem;
+  }
+}

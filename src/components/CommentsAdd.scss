@@ -1,0 +1,26 @@
+.CommentsAdd {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem auto;
+  &--input {
+    outline: none;
+    border: none;
+    padding: 1rem;
+    width: 75%;
+    font-size: 16px;
+  }
+
+  &--button {
+    outline: none;
+    border: none;
+    padding: 1rem;
+    width: 20%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

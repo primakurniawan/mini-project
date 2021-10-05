@@ -1,42 +1,36 @@
-import { FcLikePlaceholder, FcComments } from "react-icons/fc";
-import { FiPocket } from "react-icons/fi";
+import { FcComments } from "react-icons/fc";
+import { Link } from "react-router-dom";
 import "./ArticlesItem.scss";
+import Profile from "./Profile";
+import ReadTime from "./ReadTime";
+import TagsList from "./TagsList";
+import ToggleLike from "./ToggleLike";
+import ToggleSave from "./ToggleSave";
 
-const ArticlesItem = () => {
+const ArticlesItem = ({ article_id, image, title, updated_at, user_id, user_fullname, user_image, totalComments, tags, content }) => {
+  console.log();
   return (
     <div className="glass ArticlesItem">
       <div
         className="ArticlesItem__img"
         style={{
-          backgroundImage:
-            "url(https://www.nttdata.com/au/en/-/media/nttdataapac/common-images/digital/ai/digital_ai09_1024x576.jpg?h=576&la=en-AU&w=1024&hash=86E2F9414B5DFFD9CD4F6E38E6D8AC11367ED682)",
+          backgroundImage: `url(${image})`,
         }}
       ></div>
       <div className="ArticlesItem__text">
-        <div className="ArticlesItem__text--top">
-          <img src="https://www.smartcompany.com.au/wp-content/uploads/2015/06/elonmusk-600-e1511400134909-100x100.jpg" alt="" className="ArticlesItem__text--top--img" />
-          <div className="ArticlesItem__text--top--name">Elon Musk</div>
-          <div className="ArticlesItem__text--top--date">jan 25 (2 days ago)</div>
-        </div>
-        <h1 className="ArticlesItem__text--title">How AI Take Over The World</h1>
-        <ul className="ArticlesItem__text--tags">
-          <li className="ArticlesItem__text--tags--tag">tag</li>
-          <li className="ArticlesItem__text--tags--tag">tag</li>
-          <li className="ArticlesItem__text--tags--tag">tag</li>
-        </ul>
+        <Profile user_fullname={user_fullname} user_image={user_image} updated_at={updated_at} />
+        <Link to={`/articles/${article_id}`} className="ArticlesItem__text--title">
+          {title}
+        </Link>
+        <TagsList tags={tags} />
         <div className="ArticlesItem__text--bottom">
-          <span className="ArticlesItem__text--bottom--likes">
-            <FcLikePlaceholder />
-            200 likes
-          </span>
+          <ToggleLike article_id={article_id} />
           <span className="ArticlesItem__text--bottom--comments">
             <FcComments />
-            20 comments
+            {totalComments} comments
           </span>
-          <span className="ArticlesItem__text--bottom--saves">
-            <FiPocket /> 50 saves
-          </span>
-          <span className="ArticlesItem__text--bottom--readTime">5 minutes read</span>
+          <ToggleSave article_id={article_id} />
+          <ReadTime readTime={Math.ceil(content.split(" ").length / 200)} />
         </div>
       </div>
     </div>

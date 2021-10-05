@@ -1,7 +1,13 @@
 import React from "react";
+import ArticlesAddNew from "../components/ArticlesAddNew";
+import Layout from "../layouts/Layout";
 
 const NewArticlesPage = () => {
-  return <div>NewArticlesPage</div>;
+  return (
+    <Layout>
+      <ArticlesAddNew />
+    </Layout>
+  );
 };
 
 export default NewArticlesPage;

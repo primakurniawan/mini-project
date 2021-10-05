@@ -1,47 +1,60 @@
 import "./Navbar.scss";
 import { FaBars } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useMediaQuery from "../hooks/useMediaQuery";
+import { Link } from "react-router-dom";
 const Navbar = () => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
+  const isMobile = useMediaQuery("(max-width:768px)");
+
+  const user_id = localStorage.getItem("user_id");
+
+  useEffect(() => {
+    isMobile ? setActive(false) : setActive(true);
+  }, [isMobile]);
 
   const toggleNavbar = () => {
-    setActive(!active);
+    if (isMobile) setActive(!active);
+  };
+
+  const onSignOutHandler = () => {
+    localStorage.removeItem("user_id");
   };
 
   return (
     <nav className="navbar glass">
-      <span className="navbar-toggle" id="js-navbar-toggle">
+      <span className="navbar-toggle">
         <FaBars onClick={toggleNavbar} />
       </span>
-      <a href="#" className="logo">
-        logo
-      </a>
-      <ul className={active ?? "active"} id="main-nav">
+      <Link to="/" className="logo">
+        PROG
+      </Link>
+      <ul className={`main-nav ${active && isMobile ? "active" : ""}`}>
         <li>
-          <a href="#" className="nav-links">
+          <Link to="/" className="nav-links">
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-links">
-            Products
-          </a>
+          {user_id !== null && (
+            <Link to="/new" className="nav-links">
+              Add New Article
+            </Link>
+          )}
         </li>
-        <li>
-          <a href="#" className="nav-links">
-            About Us
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-links">
-            Contact Us
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-links">
-            Blog
-          </a>
-        </li>
+        {user_id === null ? (
+          <li>
+            <Link to="/auth" className="nav-links">
+              Sign In
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <Link to={window.location.pathname} className="nav-links" onClick={onSignOutHandler}>
+              Sign Out
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

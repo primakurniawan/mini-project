@@ -7,7 +7,7 @@ function App() {
   return (
     <Switch>
       <Route path={["/", "/articles"]} component={ArticlesPage} exact />
-      <Route path="/articles/:id" component={ArticleDetailPage} exact />
+      <Route path="/articles/:article_id" component={ArticleDetailPage} exact />
       <Route path={["/new", "/articles/new"]} component={NewArticlesPage} exact />
       <Route path="/auth" component={AuthPage} exact />
     </Switch>

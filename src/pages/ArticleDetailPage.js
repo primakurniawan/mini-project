@@ -1,7 +1,12 @@
-import React from "react";
+import ArticlesDetail from "../components/ArticlesDetail";
+import Layout from "../layouts/Layout";
 
 const ArticleDetailPage = () => {
-  return <div>ArticlesDetailPage</div>;
+  return (
+    <Layout>
+      <ArticlesDetail />
+    </Layout>
+  );
 };
 
 export default ArticleDetailPage;
