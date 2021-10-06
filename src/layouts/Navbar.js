@@ -40,6 +40,11 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          <Link to="/news" className="nav-links">
+            News
+          </Link>
+        </li>
+        <li>
           {user_id !== "" && (
             <Link to="/new" className="nav-links">
               Add New Article

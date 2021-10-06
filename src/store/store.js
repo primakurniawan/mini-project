@@ -4,6 +4,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./authSlice";
+import newsReducer from "./newsSlice";
 
 const persistConfig = {
   key: "root",
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   auth: authReducer,
+  news: newsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
