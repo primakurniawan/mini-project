@@ -3,11 +3,15 @@ import { FaBars } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { logout } from "../store/authSlice";
+import { useDispatch } from "react-redux";
 const Navbar = () => {
   const [active, setActive] = useState(true);
   const isMobile = useMediaQuery("(max-width:768px)");
 
-  const user_id = localStorage.getItem("user_id");
+  const { user_id } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     isMobile ? setActive(false) : setActive(true);
@@ -18,7 +22,7 @@ const Navbar = () => {
   };
 
   const onSignOutHandler = () => {
-    localStorage.removeItem("user_id");
+    dispatch(logout());
   };
 
   return (

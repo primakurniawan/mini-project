@@ -1,12 +1,13 @@
 import { useMutation, useSubscription } from "@apollo/client";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { ADD_LIKES, DELETE_LIKES } from "../graphql/mutation";
 import { TOTAL_LIKES, CHECK_LIKES } from "../graphql/subscription";
 import "./ToggleLike.scss";
 
 const ToggleLike = ({ article_id }) => {
-  const user_id = localStorage.getItem("user_id");
+  const { user_id } = useSelector((state) => state.auth);
 
   const { data: dataTotalLikes, loading: loadingTotalLikes } = useSubscription(TOTAL_LIKES, { variables: { article_id } });
   const { data: dataCheckLike, loading: loadingCheckLike } = useSubscription(CHECK_LIKES, { variables: { article_id, user_id } });

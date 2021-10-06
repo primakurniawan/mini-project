@@ -1,13 +1,14 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
 import MDEditor from "@uiw/react-md-editor";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ADD_ARTICLES_TAGS, ADD_ARTICLE_AND_TAGS } from "../graphql/mutation";
 import { GET_TAG_ID_BY_TITLE } from "../graphql/query";
 import "./ArticlesAddNew.scss";
 import Loading from "./Loading";
 const ArticlesAddNew = () => {
-  const user_id = localStorage.getItem("user_id");
+  const { user_id } = useSelector((state) => state.auth);
 
   const imageEl = useRef();
   const titleEl = useRef();

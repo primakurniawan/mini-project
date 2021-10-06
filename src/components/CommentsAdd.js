@@ -1,11 +1,12 @@
 import { useMutation } from "@apollo/client";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { ADD_COMMENT } from "../graphql/mutation";
 import "./CommentsAdd.scss";
 
 const CommentsAdd = () => {
-  const user_id = localStorage.getItem("user_id");
+  const { user_id } = useSelector((state) => state.auth);
 
   const { article_id } = useParams();
 

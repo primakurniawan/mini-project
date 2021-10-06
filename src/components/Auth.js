@@ -4,6 +4,8 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { SIGN_IN, SIGN_UP } from "../graphql/mutation";
 import { useHistory } from "react-router";
 import Loading from "./Loading";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice";
 const Auth = () => {
   const [form, setForm] = useState("signIn");
   const [errorSignUp, setErrorSignUp] = useState("");
@@ -19,6 +21,8 @@ const Auth = () => {
   const [signIn, { data: dataSignIn, loading: loadingSignIn }] = useLazyQuery(SIGN_IN);
 
   const history = useHistory();
+
+  const dispatch = useDispatch();
 
   const onSignInHandler = (e) => {
     e.preventDefault();
@@ -56,19 +60,19 @@ const Auth = () => {
     if (data?.insert_devmedia_user_one === null && !loadingSignUp) {
       setErrorSignUp("email is existed");
     } else if (data?.insert_devmedia_user_one.id) {
-      localStorage.setItem("user_id", data?.insert_devmedia_user_one.id);
+      dispatch(login({ user_id: data?.insert_devmedia_user_one.id }));
       history.push(`/`);
     }
-  }, [data, history, loadingSignUp]);
+  }, [data, dispatch, history, loadingSignUp]);
 
   useEffect(() => {
     if (dataSignIn?.devmedia_user.length > 0 && !loadingSignIn) {
-      localStorage.setItem("user_id", dataSignIn?.devmedia_user[0].id);
+      dispatch(login({ user_id: dataSignIn?.devmedia_user[0].id }));
       history.push("/");
     } else if (dataSignIn?.devmedia_user.length === 0) {
       setErrorSignIn("email or password is invalid");
     }
-  }, [dataSignIn, history, loadingSignIn]);
+  }, [dataSignIn, dispatch, history, loadingSignIn]);
 
   const signInForm = (
     <>

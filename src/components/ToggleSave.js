@@ -5,9 +5,10 @@ import { ADD_SAVES, DELETE_SAVES } from "../graphql/mutation";
 import { TOTAL_SAVES, CHECK_SAVES } from "../graphql/subscription";
 import "./ToggleSave.scss";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
 
 const ToggleSave = ({ article_id }) => {
-  const user_id = localStorage.getItem("user_id");
+  const { user_id } = useSelector((state) => state.auth);
 
   const { data: dataTotalSaves, loading: loadingTotalSaves } = useSubscription(TOTAL_SAVES, { variables: { article_id } });
 
