@@ -29,7 +29,7 @@ const ArticlesAddNew = () => {
     const title = titleEl.current.value;
     setTags((tags) => tagsEl.current.value.split(",").map((tag) => tag.trim()));
 
-    if (image !== "" && title !== "" && content !== "" && tags.length !== 0) {
+    if (/([a-z\-_0-9/:.]*\.(jpg|jpeg|png|gif))/i.test(image) && title !== "" && content !== "" && tags.length !== 0) {
       addArticleAndTags({
         variables: {
           newArticle: { image, title, content, user_id },
@@ -55,7 +55,6 @@ const ArticlesAddNew = () => {
   }, [addArticleTags, dataAllNewTagsId?.devmedia_tags]);
 
   useEffect(() => {
-    console.log(allNewTagsId);
     if (newArticleId !== "") {
       addArticleTags({
         variables: {
@@ -68,11 +67,14 @@ const ArticlesAddNew = () => {
   }, [addArticleTags, allNewTagsId, history, newArticleId]);
 
   useEffect(() => {
-    console.log(dataArticleTags);
     if (dataArticleTags?.insert_devmedia_articles_tags.affected_rows) {
       history.push(`/articles/${newArticleId}`);
     }
   }, [dataArticleTags, history, newArticleId]);
+
+  if (user_id === null) {
+    history.push("/auth");
+  }
 
   if (loading || loadingAllNewTagsId || loadingArticleTags) {
     return <Loading />;

@@ -1,11 +1,11 @@
-import { useQuery, useSubscription } from "@apollo/client";
-import { GET_ALL_ARTICLES } from "../graphql/query";
+import { useSubscription } from "@apollo/client";
+import { GET_ALL_ARTICLES } from "../graphql/subscription";
 import ArticlesItem from "./ArticlesItem";
 import "./ArticlesList.scss";
 import Loading from "./Loading";
 
 const ArticlesList = () => {
-  const { data, loading } = useQuery(GET_ALL_ARTICLES);
+  const { data, loading } = useSubscription(GET_ALL_ARTICLES);
 
   if (loading) {
     return <Loading />;

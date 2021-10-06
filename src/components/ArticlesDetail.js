@@ -15,7 +15,7 @@ import ToggleSave from "./ToggleSave";
 
 const ArticlesDetail = () => {
   const { article_id } = useParams();
-  const { data, loading, error } = useSubscription(GET_ARTICLES_BY_ID, { variables: { article_id } });
+  const { data, loading } = useSubscription(GET_ARTICLES_BY_ID, { variables: { article_id } });
 
   if (loading) {
     return <Loading />;
@@ -45,7 +45,6 @@ const ArticlesDetail = () => {
         </div>
         <h1 className="ArticlesDetail__text--title">{data?.devmedia_articles_by_pk.title}</h1>
         {data?.devmedia_articles_by_pk.articles_tags && <TagsList tags={data?.devmedia_articles_by_pk.articles_tags} />}
-        {console.log(data?.devmedia_articles_by_pk.articles_tags)}
         <div className="ArticlesDetail__text--content">
           <MDEditor.Markdown source={data?.devmedia_articles_by_pk.content} />
         </div>

@@ -11,27 +11,29 @@ const CommentsAdd = () => {
 
   const commentEl = useRef();
 
-  const [addComment, { data: dataAddComment, error: errorAddComment, loading: loadingAddComment }] = useMutation(ADD_COMMENT);
+  const [addComment, { loading: loadingAddComment }] = useMutation(ADD_COMMENT);
 
   const history = useHistory();
 
   const addCommentHandler = (e) => {
     e.preventDefault();
-    const comment = commentEl.current.value;
-    if (user_id === null) {
-      history.push("/auth");
-    }
-    if (comment !== "") {
-      addComment({
-        variables: {
-          object: {
-            user_id,
-            comment,
-            article_id,
+    if (!loadingAddComment) {
+      const comment = commentEl.current.value;
+      if (user_id === null) {
+        history.push("/auth");
+      }
+      if (comment !== "") {
+        addComment({
+          variables: {
+            object: {
+              user_id,
+              comment,
+              article_id,
+            },
           },
-        },
-      });
-      commentEl.current.value = "";
+        });
+        commentEl.current.value = "";
+      }
     }
   };
 

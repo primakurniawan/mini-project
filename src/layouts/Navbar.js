@@ -36,7 +36,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          {user_id !== null && (
+          {user_id !== "" && (
             <Link to="/new" className="nav-links">
               Add New Article
             </Link>

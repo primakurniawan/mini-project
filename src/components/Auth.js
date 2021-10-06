@@ -10,6 +10,7 @@ const Auth = () => {
   const [errorSignIn, setErrorSignIn] = useState("");
 
   const emailEl = useRef();
+  const imageEl = useRef();
   const fullnameEl = useRef();
   const passwordEl = useRef();
   const confirmPasswordEl = useRef();
@@ -26,24 +27,28 @@ const Auth = () => {
     signIn({ variables: { email, password } });
   };
 
-  const onSignUpHandler = async (e) => {
+  const onSignUpHandler = (e) => {
     e.preventDefault();
+    const image = imageEl.current.value;
     const email = emailEl.current.value;
     const fullname = fullnameEl.current.value;
     const password = passwordEl.current.value;
     const confirmPassword = confirmPasswordEl.current.value;
-    if (password === confirmPassword) {
+    if (password === confirmPassword && /([a-z\-_0-9/:.]*\.(jpg|jpeg|png|gif))/i.test(image)) {
       signUp({
         variables: {
           object: {
+            image,
             email,
             fullname,
             password,
           },
         },
       });
-    } else {
+    } else if (password !== confirmPassword) {
       setErrorSignUp("password is not same with confirm password");
+    } else if (!/([a-z\-_0-9/:.]*\.(jpg|jpeg|png|gif))/i.test(image)) {
+      setErrorSignUp("image url is invalid");
     }
   };
 
@@ -57,7 +62,6 @@ const Auth = () => {
   }, [data, history, loadingSignUp]);
 
   useEffect(() => {
-    console.log(dataSignIn);
     if (dataSignIn?.devmedia_user.length > 0 && !loadingSignIn) {
       localStorage.setItem("user_id", dataSignIn?.devmedia_user[0].id);
       history.push("/");
@@ -71,7 +75,7 @@ const Auth = () => {
       {errorSignIn !== "" && <p className="Auth__error">{errorSignIn}</p>}
       <form className="Auth__form" onSubmit={onSignInHandler}>
         <input className="Auth__form--input glass" placeholder="email ..." type="text" ref={emailEl} />
-        <input className="Auth__form--input glass" placeholder="password" type="text" ref={passwordEl} />
+        <input className="Auth__form--input glass" placeholder="password" type="password" ref={passwordEl} />
         <input className="Auth__form--button glass" type="submit" placeholder="Sign In" />
         <p className="Auth__form--description">
           Don't have account{" "}
@@ -90,6 +94,7 @@ const Auth = () => {
     <>
       {errorSignUp !== "" && <p className="Auth__error">{errorSignUp}</p>}
       <form className="Auth__form" onSubmit={onSignUpHandler}>
+        <input ref={imageEl} className="Auth__form--input glass" placeholder="image profile" type="text" required />
         <input ref={emailEl} className="Auth__form--input glass" placeholder="email" type="email" required />
         <input ref={fullnameEl} className="Auth__form--input glass" placeholder="fullname" type="text" required />
         <input ref={passwordEl} className="Auth__form--input glass" placeholder="password" type="password" required />
