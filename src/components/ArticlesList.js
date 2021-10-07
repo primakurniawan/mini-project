@@ -5,7 +5,6 @@ const ArticlesList = ({ articles }) => {
   return (
     <div className="ArticlesList">
       {articles.map((article) => {
-        console.log(article);
         return (
           <ArticlesItem
             key={article.id}

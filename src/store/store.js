@@ -16,6 +16,7 @@ const reducers = combineReducers({
   auth: authReducer,
   news: newsReducer,
   saved: savedReducer,
+  persist: true,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -19,7 +19,6 @@ const ToggleSave = ({ article_id, totalSaved }) => {
 
   const toggleSave = () => {
     if (!loading) {
-      console.log(data?.devmedia_articles_by_pk);
       if (saved.find((e) => e.id === article_id)) {
         dispatch(removeSaved({ id: article_id }));
         removeSavedDb({ variables: { article_id } });
