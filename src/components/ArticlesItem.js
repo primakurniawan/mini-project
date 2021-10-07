@@ -28,7 +28,7 @@ const ArticlesItem = ({ article_id, image, title, created_at, user_fullname, use
             {totalComments} comments
           </span>
           <ToggleSave article_id={article_id} totalSaved={saved} />
-          <span className="ArticlesItem__text--bottom--readTime">{Math.ceil(content.split(" ").length / 200)} min read time</span>
+          <span className="ArticlesItem__text--bottom--readTime">{Math.ceil(content?.split(" ").length / 200)} min read time</span>
         </div>
       </div>
     </div>

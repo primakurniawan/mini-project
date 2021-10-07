@@ -45,6 +45,11 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
+          <Link to="/saved" className="nav-links">
+            Saved
+          </Link>
+        </li>
+        <li>
           {user_id !== "" && (
             <Link to="/new" className="nav-links">
               Add New Article

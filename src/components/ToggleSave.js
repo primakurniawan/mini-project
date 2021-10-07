@@ -11,25 +11,28 @@ import { addSaved, removeSaved } from "../store/savedSlice";
 const ToggleSave = ({ article_id, totalSaved }) => {
   const { saved } = useSelector((state) => state);
 
-  const { data } = useSubscription(GET_ARTICLES_BY_ID, { variables: { article_id } });
+  const { data, loading } = useSubscription(GET_ARTICLES_BY_ID, { variables: { article_id } });
   const [addSavedDb] = useMutation(ADD_SAVED);
   const [removeSavedDb] = useMutation(REMOVED_SAVED);
 
   const dispatch = useDispatch();
 
   const toggleSave = () => {
-    if (saved.find((e) => e.article_id === article_id)) {
-      dispatch(removeSaved({ article_id }));
-      removeSavedDb({ variables: { article_id } });
-    } else {
-      dispatch(addSaved({ article: { ...data?.devmedia_articles_by_pk, article_id } }));
-      addSavedDb({ variables: { article_id } });
+    if (!loading) {
+      console.log(data?.devmedia_articles_by_pk);
+      if (saved.find((e) => e.id === article_id)) {
+        dispatch(removeSaved({ id: article_id }));
+        removeSavedDb({ variables: { article_id } });
+      } else {
+        dispatch(addSaved({ article: { ...data?.devmedia_articles_by_pk, id: article_id, saved: data?.devmedia_articles_by_pk.saved + 1 } }));
+        addSavedDb({ variables: { article_id } });
+      }
     }
   };
 
   return (
     <span className="ToggleSave">
-      <span onClick={toggleSave}>{saved.find((e) => e?.article_id === article_id) ? <FaGetPocket className="ToggleSave__icon" /> : <FiPocket className="ToggleSave__icon" />}</span>
+      <span onClick={toggleSave}>{saved.find((e) => e.id === article_id) ? <FaGetPocket className="ToggleSave__icon" /> : <FiPocket className="ToggleSave__icon" />}</span>
       {totalSaved} saved
     </span>
   );

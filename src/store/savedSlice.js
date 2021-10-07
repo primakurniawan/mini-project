@@ -9,8 +9,8 @@ const savedSlice = createSlice({
       return [...state, article];
     },
     removeSaved: (state, action) => {
-      const { article_id } = action.payload;
-      return state.filter((e) => e.article_id !== article_id);
+      const { id } = action.payload;
+      return state.filter((e) => e.id !== id);
     },
   },
 });
