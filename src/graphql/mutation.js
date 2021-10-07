@@ -74,3 +74,19 @@ export const SIGN_IN = gql`
     }
   }
 `;
+
+export const ADD_SAVED = gql`
+  mutation MyMutation($article_id: uuid!) {
+    update_devmedia_articles_by_pk(pk_columns: { id: $article_id }, _inc: { saved: 1 }) {
+      saved
+    }
+  }
+`;
+
+export const REMOVED_SAVED = gql`
+  mutation MyMutation($article_id: uuid!) {
+    update_devmedia_articles_by_pk(pk_columns: { id: $article_id }, _inc: { saved: -1 }) {
+      saved
+    }
+  }
+`;

@@ -4,6 +4,7 @@ import ArticlesPage from "./pages/ArticlesPage";
 import AuthPage from "./pages/AuthPage";
 import NewArticlesPage from "./pages/NewArticlesPage";
 import NewsPage from "./pages/NewsPage";
+import SavedPage from "./pages/SavedPage";
 function App() {
   return (
     <Switch>
@@ -12,6 +13,7 @@ function App() {
       <Route path={["/new", "/articles/new"]} component={NewArticlesPage} exact />
       <Route path="/auth" component={AuthPage} exact />
       <Route path="/news" component={NewsPage} exact />
+      <Route path="/saved" component={SavedPage} exact />
     </Switch>
   );
 }

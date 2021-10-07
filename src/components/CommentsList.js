@@ -12,7 +12,7 @@ const CommentList = () => {
   return (
     <div className="commentsList">
       {data?.devmedia_comments.map((comment) => (
-        <CommentsItem key={comment.id} comment={comment.comment} user_image={comment.user.image} user_fullname={comment.user.fullname} updated_at={comment.updated_at} />
+        <CommentsItem key={comment.id} comment={comment.comment} user_image={comment.user.image} user_fullname={comment.user.fullname} created_at={comment.created_at} />
       ))}
     </div>
   );

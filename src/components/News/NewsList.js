@@ -4,7 +4,6 @@ import NewsItem from "./NewsItem";
 
 const NewsList = () => {
   const [{ news, loading, error }] = useFetchNews();
-  console.log(loading);
   const { articles, queries, totalResults } = news;
   return (
     <>
