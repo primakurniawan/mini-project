@@ -14,7 +14,6 @@
     "graphql": "^15.6.0",
     "moment": "^2.29.1",
     "node-pre-gyp": "^0.17.0",
-    "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
@@ -24,12 +23,13 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "redux-persist": "^6.0.0",
+    "sass": "^1.55.0",
     "subscriptions-transport-ws": "^0.9.19",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
